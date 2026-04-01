@@ -136,6 +136,12 @@ body {
   line-height: 1;
 }
 
+/* lang switcher */
+.lang-switcher { display: flex; gap: 6px; justify-content: center; margin-top: 6px; }
+.lang-btn { background: none; border: 2px solid transparent; border-radius: 8px; padding: 4px 8px; font-size: 1.3rem; cursor: pointer; transition: border-color 0.2s, transform 0.2s; line-height: 1; }
+.lang-btn:hover { transform: scale(1.1); }
+.lang-btn.active { border-color: var(--accent); }
+
 /* stats bar */
 .stats-bar {
   display: grid;
@@ -197,7 +203,7 @@ body {
 
 .operation-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
 }
 .op-card {
@@ -254,6 +260,7 @@ body {
 }
 .diff-btn:hover { opacity: 0.85; transform: translateY(-2px); }
 .diff-btn.selected { color: #fff; box-shadow: var(--shadow); }
+.diff-range { font-size: 0.68rem; font-weight: 500; opacity: 0.8; }
 
 .count-row { display: flex; gap: 10px; }
 .count-btn {
@@ -331,7 +338,7 @@ body {
 .game-screen {
   flex: 1;
   display: grid;
-  grid-template-rows: 50px 10px 210px 1fr 96px;
+  grid-template-rows: 50px 10px 14px 210px 1fr 96px;
   gap: 16px;
   padding: 16px 0;
   width: 100%;
@@ -752,3 +759,155 @@ body {
 
 /* ===== SCROLLBAR ===== */
 ::-webkit-scrollbar { width: 0; }
+
+
+/* ===== GAME MODES (Home) ===== */
+.mode-row { display: flex; gap: 12px; margin-bottom: 4px; }
+.mode-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  background: var(--card);
+  border: 2px solid var(--card2);
+  border-radius: var(--radius);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.mode-btn:hover { border-color: var(--accent); background: var(--card2); }
+.mode-btn.selected { border-color: var(--accent); background: var(--card2); color: var(--accent2); }
+.mode-btn-icon { font-size: 1.5rem; }
+.mode-btn-label { font-weight: 700; font-size: 0.95rem; }
+.mode-btn small { color: var(--text2); font-size: 0.75rem; }
+
+/* ===== DAILY CHALLENGE BUTTON ===== */
+.btn-daily {
+  width: 100%;
+  padding: 15px;
+  background: var(--card);
+  border: 2px solid #ff9800;
+  border-radius: var(--radius);
+  color: #ff9800;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-daily:hover { background: #ff9800; color: #fff; }
+
+/* ===== LIVES DISPLAY ===== */
+.lives-display { display: flex; gap: 2px; align-items: center; }
+.heart { font-size: 1.1rem; line-height: 1; }
+
+/* ===== QUESTION TIMER ===== */
+.question-timer {
+  position: relative;
+  height: 14px;
+  background: var(--card2);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.question-timer--inactive { visibility: hidden; }
+.question-timer-bar {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.9s linear, background 0.3s;
+}
+.question-timer-text {
+  position: absolute;
+  right: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ===== HINT BUTTON ===== */
+.hint-row { display: flex; justify-content: center; margin-top: -4px; }
+.hint-btn {
+  background: none;
+  border: 1px dashed var(--text2);
+  border-radius: 20px;
+  color: var(--text2);
+  padding: 6px 18px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.hint-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* ===== ELIMINATED CHOICE ===== */
+.choice-btn.eliminated {
+  opacity: 0.22;
+  cursor: not-allowed;
+  text-decoration: line-through;
+  transform: none !important;
+}
+
+/* ===== CONFETTI ===== */
+.confetti-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+.confetti-piece {
+  position: absolute;
+  top: -12px;
+  border-radius: 3px;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+.confetti-fall-l {
+  animation-name: confetti-fall-left;
+}
+.confetti-fall-r {
+  animation-name: confetti-fall-right;
+}
+@keyframes confetti-fall-left {
+  0%   { transform: translateY(0)     rotate(0deg);    opacity: 1; }
+  100% { transform: translateY(110vh) rotate(-600deg); opacity: 0.2; }
+}
+@keyframes confetti-fall-right {
+  0%   { transform: translateY(0)     rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(110vh) rotate(600deg); opacity: 0.2; }
+}
+
+/* ===== XP / LEVEL (Results) ===== */
+.xp-gained {
+  font-size: 0.9rem;
+  color: var(--text2);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* ===== LEVEL CARD (StatsScreen) ===== */
+.level-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+.level-card-left { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.level-badge {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.level-name { font-weight: 700; font-size: 0.95rem; color: var(--text2); }
+.level-card-right { flex: 1; }
+.xp-bar-wrap { height: 10px; background: var(--card2); border-radius: 6px; overflow: hidden; margin-bottom: 5px; }
+.xp-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-dark)); border-radius: 6px; transition: width 0.6s ease; }
+.xp-label { font-size: 0.75rem; color: var(--text2); text-align: right; }

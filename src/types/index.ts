@@ -1,4 +1,4 @@
-export type Operation = 'addition' | 'subtraction' | 'multiplication' | 'division' | 'fractions';
+export type Operation = 'addition' | 'subtraction' | 'multiplication' | 'division' | 'fractions' | 'percentages';
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
@@ -15,7 +15,10 @@ export interface GameConfig {
   operations: Operation[];
   difficulty: Difficulty;
   questionCount: number;
-  maxNumber: number;
+  livesMode: boolean;
+  timedMode: boolean;
+  hintsPerGame: number;
+  isDaily?: boolean;
 }
 
 export interface GameResult {
@@ -28,6 +31,8 @@ export interface GameResult {
   operations: Operation[];
   difficulty: Difficulty;
   date: number;
+  xpGained: number;
+  hadBounceBack: boolean;
 }
 
 export interface Achievement {
@@ -47,4 +52,8 @@ export interface PlayerStats {
   gamesPlayed: number;
   achievements: string[];
   history: GameResult[];
+  xp: number;
+  level: number;
+  consecutiveDays: number;
+  lastPlayedDate: string;
 }
