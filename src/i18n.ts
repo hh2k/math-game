@@ -117,7 +117,7 @@ export const translations = {
     },
     level: { prefix: 'Niv.' },
   },
-} as const;
+};
 
 export type T = typeof translations.en;
 

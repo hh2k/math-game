@@ -213,6 +213,7 @@ export function useGame(lang: Lang) {
       date: Date.now(),
       xpGained: s.score,
       hadBounceBack: s.hadBounceBack,
+      livesMode: cfg.livesMode,
     };
     const { newAchievements } = recordGame(result);
     setState(prev => ({ ...prev, result, newAchievements }));

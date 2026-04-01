@@ -44,10 +44,8 @@ export function loadStats(): PlayerStats {
     if (raw) {
       const s = JSON.parse(raw) as PlayerStats;
       // Ensure new fields have defaults for old saves
-      return {
-        xp: 0, level: 1, consecutiveDays: 0, lastPlayedDate: '',
-        ...s,
-      };
+      const defaults = { xp: 0, level: 1, consecutiveDays: 0, lastPlayedDate: '' };
+      return { ...defaults, ...s };
     }
   } catch { /* ignore */ }
   return {

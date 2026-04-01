@@ -33,6 +33,7 @@ export interface GameResult {
   date: number;
   xpGained: number;
   hadBounceBack: boolean;
+  livesMode: boolean;
 }
 
 export interface Achievement {
