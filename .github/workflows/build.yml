@@ -15,7 +15,7 @@ jobs:
     steps:
       # Step 1: Check out the code
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6.0.2
 
       # New step: Read version from package.json
       - name: Get version from package.json
@@ -37,7 +37,7 @@ jobs:
 
       # Step 4: Transfer the Docker image to the remote server
       - name: Transfer Docker image to server
-        uses: easingthemes/ssh-deploy@v5.1.1
+        uses: easingthemes/ssh-deploy@v6.0.1
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
