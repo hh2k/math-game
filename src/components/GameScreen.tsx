@@ -50,13 +50,16 @@ export default function GameScreen({
   const [selected, setSelected] = useState<number | null>(null);
   const [animate, setAnimate] = useState(false);
   const [confirmQuit, setConfirmQuit] = useState(false);
+  const [correctMsg, setCorrectMsg] = useState('');
 
   useEffect(() => {
     setSelected(null);
     setAnimate(true);
-    const t = setTimeout(() => setAnimate(false), 400);
-    return () => clearTimeout(t);
-  }, [question.id]);
+    const msgs = t.game.correct;
+    setCorrectMsg(msgs[Math.floor(Math.random() * msgs.length)]);
+    const timer = setTimeout(() => setAnimate(false), 400);
+    return () => clearTimeout(timer);
+  }, [question.id, t.game.correct]);
 
   // Keyboard 1-4
   useEffect(() => {
@@ -171,7 +174,7 @@ export default function GameScreen({
           {isGameOver
             ? t.game.gameOver
             : lastCorrect
-              ? t.game.correct
+              ? correctMsg
               : t.game.oops(question.answer)}
         </span>
         <span className={`streak-msg ${lastCorrect && streak >= 3 ? '' : 'streak-msg--hidden'}`}>

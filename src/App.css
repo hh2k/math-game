@@ -73,6 +73,7 @@ body {
 .app {
   width: 100%;
   max-width: 960px;
+  min-width: 0;
   height: 100dvh;
   overflow: hidden;
   padding: 0 32px;
@@ -338,6 +339,7 @@ body {
 .game-screen {
   flex: 1;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 50px 10px 14px 210px 1fr 96px;
   gap: 16px;
   padding: 16px 0;
@@ -472,17 +474,18 @@ body {
 }
 
 .feedback-banner {
-  max-width: 100%;
-  min-width: 800px;
+  width: 100%;
+  min-width: 0;
   border-radius: var(--radius);
-  padding: 0 24px;
+  padding: 0 20px;
   height: 96px;
   min-height: 96px;
   max-height: 96px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: nowrap;
+  overflow: hidden;
   border: 2px solid transparent;
   background: var(--card);
   transition: background 0.15s, border-color 0.15s, opacity 0.2s;
@@ -510,8 +513,8 @@ body {
 }
 .feedback-icon { font-size: 1.8rem; flex: 0 0 2.4rem; width: 2.4rem; text-align: center; }
 .feedback-banner > span:nth-child(2) { font-size: 1.1rem; font-weight: 600; flex: 1; min-width: 0; }
-.streak-msg { font-size: 0.9rem; color: var(--orange); font-weight: 700; flex-shrink: 0; white-space: nowrap; }
-.streak-msg--hidden { visibility: hidden; }
+.streak-msg { font-size: 0.9rem; color: var(--orange); font-weight: 700; flex-shrink: 0; white-space: nowrap; overflow: hidden; }
+.streak-msg--hidden { max-width: 0; overflow: hidden; opacity: 0; }
 .btn-next {
   background: linear-gradient(135deg, var(--accent), var(--accent-dark));
   border: none;
@@ -530,7 +533,7 @@ body {
 
 /* ===== RESULTS ===== */
 .results-screen {
-  width: 800px;
+  width: 100%;
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -612,7 +615,7 @@ body {
 
 /* ===== STATS SCREEN ===== */
 .stats-screen {
-  width: 800px;
+  width: 100%;
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -911,3 +914,101 @@ body {
 .xp-bar-wrap { height: 10px; background: var(--card2); border-radius: 6px; overflow: hidden; margin-bottom: 5px; }
 .xp-bar { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-dark)); border-radius: 6px; transition: width 0.6s ease; }
 .xp-label { font-size: 0.75rem; color: var(--text2); text-align: right; }
+
+/* ===== RESPONSIVE — TABLET (≤768px) ===== */
+@media (max-width: 768px) {
+  .app { padding: 0 16px; max-width: 100%; }
+
+  /* Home */
+  .home-header h1 { font-size: 2rem; }
+  .logo { font-size: 44px; }
+  .operation-grid { grid-template-columns: repeat(3, 1fr); }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); }
+
+  /* Game */
+  .game-screen { grid-template-rows: 46px 10px 14px 180px 1fr 90px; gap: 12px; }
+  .question-prompt { font-size: 2.4rem; }
+  .choice-btn { font-size: 1.7rem; }
+  .feedback-banner { height: 90px; min-height: 90px; max-height: 90px; }
+  .feedback-banner > span:nth-child(2) { font-size: 0.95rem; }
+  .btn-next { flex: 0 0 120px; font-size: 0.9rem; padding: 10px 16px; }
+  .score-display { font-size: 1rem; min-width: 72px; }
+  .timer { font-size: 0.9rem; }
+
+  /* Results */
+  .results-stats { grid-template-columns: repeat(2, 1fr); }
+
+  /* Stats */
+  .achievements-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== RESPONSIVE — MOBILE (≤480px) ===== */
+@media (max-width: 480px) {
+  .app { padding: 0 8px; max-width: 100%; }
+
+  /* Home */
+  .home { padding: 14px 0 12px; }
+  .home-header { margin-bottom: 12px; }
+  .home-header h1 { font-size: 1.7rem; }
+  .logo { font-size: 36px; }
+  .tagline { font-size: 0.88rem; }
+  .operation-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; }
+  .op-card { padding: 10px 4px; }
+  .op-icon { font-size: 1.3rem; }
+  .op-label { font-size: 0.7rem; }
+  .op-desc { display: none; }
+  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 6px; padding: 10px 8px; }
+  .stat-val { font-size: 1.1rem; }
+  .stat-label { font-size: 0.62rem; }
+  .diff-btn { padding: 10px 6px; font-size: 0.85rem; }
+  .diff-range { font-size: 0.6rem; }
+  .count-btn { padding: 10px; font-size: 0.95rem; }
+  .config-section h2 { font-size: 0.75rem; margin: 12px 0 6px; }
+  .btn-start { padding: 14px; font-size: 1.05rem; }
+  .btn-secondary, .btn-ghost, .btn-daily { padding: 12px; font-size: 0.95rem; }
+  .mode-btn { padding: 10px 6px; }
+  .mode-btn-label { font-size: 0.82rem; }
+  .mode-btn small { font-size: 0.68rem; }
+  .home-actions { margin-top: 14px; gap: 8px; }
+
+  /* Game */
+  .game-screen { grid-template-rows: 42px 8px 12px 160px 1fr 84px; gap: 10px; padding: 12px 0; }
+  .quit-btn { padding: 6px 10px; font-size: 0.8rem; }
+  .game-info { gap: 8px; }
+  .timer { font-size: 0.82rem; }
+  .score-display { font-size: 0.9rem; min-width: 60px; }
+  .streak-badge { font-size: 0.8rem; padding: 3px 10px; }
+  .q-counter { font-size: 0.82rem; }
+  .question-op-badge { font-size: 1.5rem; width: 46px; height: 46px; }
+  .question-prompt { font-size: 2rem; }
+  .question-points { font-size: 0.78rem; }
+  .question-area { padding: 14px 16px; gap: 6px; }
+  .choices-grid { gap: 10px; }
+  .choice-btn { font-size: 1.5rem; border-radius: 14px; }
+  .feedback-banner { height: 84px; min-height: 84px; max-height: 84px; padding: 0 12px; gap: 8px; }
+  .feedback-icon { font-size: 1.4rem; flex: 0 0 2rem; width: 2rem; }
+  .feedback-banner > span:nth-child(2) { font-size: 0.88rem; }
+  .streak-msg { font-size: 0.78rem; }
+  .btn-next { flex: 0 0 100px; font-size: 0.82rem; padding: 8px 12px; border-radius: 10px; }
+  .hint-btn { font-size: 0.78rem; padding: 5px 14px; }
+
+  /* Results */
+  .results-stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .res-stat { padding: 12px 6px; }
+  .res-stat-val { font-size: 1rem; }
+  .results-header h1 { font-size: 1.5rem; }
+  .score-big { font-size: 2.4rem; }
+  .grade-emoji { font-size: 2.4rem; }
+
+  /* Stats */
+  .stats-overview { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .ov-card { padding: 12px 6px; }
+  .ov-card > span { font-size: 1.2rem; }
+  .ov-card strong { font-size: 1.1rem; }
+  .achievements-grid { grid-template-columns: 1fr; }
+  .level-card { padding: 12px 14px; }
+
+  /* History */
+  .history-item { padding: 10px 12px; font-size: 0.82rem; }
+  .hist-date { display: none; }
+}
