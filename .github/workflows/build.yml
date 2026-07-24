@@ -56,5 +56,5 @@ jobs:
             docker stop math-game
             docker rm math-game
             docker load -i ~/math-game.tar
-            docker run -d --name math-game -p 5007:80 --restart unless-stopped math-game:${{ steps.package-version.outputs.version }}
+            docker run -d --name math-game -p 5007:8080 --restart unless-stopped math-game:${{ steps.package-version.outputs.version }}
             rm ~/math-game.tar  # Optionally remove the tar file after loading

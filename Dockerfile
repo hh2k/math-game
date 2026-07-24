@@ -1,5 +1,5 @@
 # Use a node base image
-FROM node:22-alpine AS build
+FROM node:24.18.0-alpine3.24 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -14,20 +14,24 @@ COPY . .
 # Build the Vite app
 RUN npm run build
 
-# Use a lightweight web server to serve the static files
-FROM nginx:alpine
+# Use a lightweight, unprivileged web server to serve the static files
+FROM nginxinc/nginx-unprivileged:1.31.3-alpine3.24
 
-# Update base packages
+# Update base packages (needs root; image defaults to the unprivileged nginx user)
+USER root
 RUN apk update && apk upgrade --no-cache
 
 # Copy the Vite app build files to the NGINX directory
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build --chown=nginx:nginx /app/dist /usr/share/nginx/html
 
 # Copy custom nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/conf.d/default.conf
+
+# Drop back to the unprivileged nginx user for runtime
+USER nginx
 
 # Expose the port that NGINX is running on
-EXPOSE 80
+EXPOSE 8080
 
 # Start NGINX server
 CMD ["nginx", "-g", "daemon off;"]
