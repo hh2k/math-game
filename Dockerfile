@@ -1,5 +1,5 @@
 # Use a node base image
-FROM node:24.18.0-alpine3.24 AS build
+FROM node:26.11.1-alpine3.24 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # Use a lightweight, unprivileged web server to serve the static files
-FROM nginxinc/nginx-unprivileged:1.31.3-alpine3.24
+FROM nginxinc/nginx-unprivileged:1.31.6-alpine3.24
 
 # Update base packages (needs root; image defaults to the unprivileged nginx user)
 USER root
