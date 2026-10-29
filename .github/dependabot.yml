@@ -1,0 +1,31 @@
+version: 2
+updates:
+  # npm: no routine updates, only security (CVE) fix PRs, which you merge yourself
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0   # 0 = security updates only
+    groups:
+      # Combine several CVE fixes into one PR
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+
+  # Docker base images: weekly PRs for new minor/patch versions.
+  # Dependabot doesn't report image CVEs, so these PRs are how pinned images get fixes.
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions: security fixes only
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
