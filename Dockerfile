@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # Use a lightweight, unprivileged web server to serve the static files
-FROM nginxinc/nginx-unprivileged:1.31.6-alpine3.24
+FROM nginxinc/nginx-unprivileged:1.31.7-alpine3.24
 
 # Update base packages (needs root; image defaults to the unprivileged nginx user)
 USER root
